@@ -2,6 +2,8 @@ FROM node:15-alpine
 
 ENV NODE_ENV=production
 ENV NODE_PATH=/usr/local/lib/node_modules
+RUN npm install -g http-proxy@latest
+RUN npm install -g proxy-from-env@latest
 COPY server.js .
 RUN mkdir -p ./lib
 COPY lib/* ./lib
