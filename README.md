@@ -12,6 +12,7 @@ Get the latest release from [Docker Hub]().
 
 Env  | Default | Description
 ---- | ------- | -----------
+HOST | 0.0.0.0 | Server listening ip
 PORT | 8080    | Server listening port
 CORSANYWHERE_BLACKLIST | | If set, requests whose origin is listed are blocked.<br>Comma separated. Example: `https://abuse.example.com,http://abuse.example.com`
 CORSANYWHERE_WHITELIST | | If set, requests whose origin is not listed are blocked.<br>If this list is empty, all origins are allowed.<br>Comma separated. Example: `https://good.example.com,http://good.example.com`
