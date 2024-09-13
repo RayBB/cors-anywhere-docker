@@ -1,4 +1,6 @@
 # reon04/cors-anywhere-docker
+[![Build Docker image](https://github.com/reon04/cors-anywhere-docker/actions/workflows/docker-build.yml/badge.svg)](https://github.com/reon04/cors-anywhere-docker/actions/workflows/docker-build.yml)
+[![Publish Docker image](https://github.com/reon04/cors-anywhere-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/reon04/cors-anywhere-docker/actions/workflows/docker-publish.yml)
 
 A docker image for [cors-anywhere](https://github.com/Rob--W/cors-anywhere).
 
