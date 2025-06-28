@@ -1,0 +1,19 @@
+{
+  "name": "cors-anywhere-docker",
+  "version": "1.0.0",
+  "description": "[![Publish Docker image](https://github.com/reon04/cors-anywhere-docker/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/reon04/cors-anywhere-docker/actions/workflows/docker-publish.yml)",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-proxy": "^1.18.1",
+    "proxy-from-env": "^1.1.0"
+  }
+}
