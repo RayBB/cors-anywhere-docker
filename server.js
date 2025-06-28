@@ -43,7 +43,7 @@ cors_proxy.createServer({
     // 'x-forwarded-port',
     // Added to adapt to NC trusted domains https://docs.nextcloud.com/server/30/admin_manual/installation/installation_wizard.html#trusted-domains
     'host',
-    'origin',
+    // 'origin',
     'x-forwarded-host',
   ],
   redirectSameOrigin: true,
