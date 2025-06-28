@@ -23,7 +23,10 @@ var cors_proxy = require('./lib/cors-anywhere');
 cors_proxy.createServer({
   originBlacklist: originBlacklist,
   originWhitelist: originWhitelist,
-  requireHeader: ['origin', 'x-requested-with'],
+  requireHeader: [
+                  //'origin',
+                  //'x-requested-with'
+  ],
   checkRateLimit: checkRateLimit,
   removeHeaders: [
     'cookie',
@@ -39,7 +42,8 @@ cors_proxy.createServer({
     // 'x-forwarded-proto',
     // 'x-forwarded-port',
     // Added to adapt to NC trusted domains https://docs.nextcloud.com/server/30/admin_manual/installation/installation_wizard.html#trusted-domains
-    'host'
+    'host',
+    'origin',
   ],
   redirectSameOrigin: true,
   httpProxyOptions: {
