@@ -71,7 +71,7 @@ const server = http.createServer((req, res) => {
   console.log("newPath", newPath);
 
   // Log the transformation for debugging
-  console.log(`Proxying request: ${originalPath} -> ${newPath}`);
+  console.log(`Proxying request: ${req.method} ${originalPath} -> ${newPath}`);
 
   // Modify the request URL before passing it to the cors-anywhere handler
   req.url = newPath;
