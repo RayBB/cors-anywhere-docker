@@ -20,7 +20,13 @@ function parseEnvList(env) {
 var checkRateLimit = require('./lib/rate-limit')(process.env.CORSANYWHERE_RATELIMIT);
 
 var cors_proxy = require('./lib/cors-anywhere');
-cors_proxy.createServer({
+const http = require('http');
+const TARGET_URL = process.env.TARGET_URL; // <--- CHANGE THIS
+if (!TARGET_URL) {
+    throw new Error('TARGET_URL is not set');
+}
+
+const corsAnywhereOptions = {
   originBlacklist: originBlacklist,
   originWhitelist: originWhitelist,
   requireHeader: [
@@ -51,6 +57,30 @@ cors_proxy.createServer({
     // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
     xfwd: false,
   },
-}).listen(port, host, function() {
-  console.log('Running CORS Anywhere on ' + host + ':' + port);
+}
+var httpProxy = require('http-proxy');
+const proxy = httpProxy.createServer(corsAnywhereOptions.httpProxyOptions);
+const corsHandler = cors_proxy.getHandler(corsAnywhereOptions, proxy);
+// 3. Create a standard Node.js server to wrap the handler.
+const server = http.createServer((req, res) => {
+  // The original incoming path, e.g., "/fish" or "/api/data?id=123"
+  const originalPath = req.url;
+
+  // The new, modified path that cors-anywhere understands
+  const newPath = `/${TARGET_URL}${originalPath}`;
+  console.log("newPath", newPath);
+
+  // Log the transformation for debugging
+  console.log(`Proxying request: ${originalPath} -> ${newPath}`);
+
+  // Modify the request URL before passing it to the cors-anywhere handler
+  req.url = newPath;
+
+  // 4. Pass the modified request to the cors-anywhere handler.
+  corsHandler(req, res);
+});
+
+server.listen(port, host, function() {
+  console.log(`✅ Running DEDICATED CORS Anywhere on ${host}:${port}`);
+  console.log(`🚀 Proxying all requests to: ${TARGET_URL}`);
 });
